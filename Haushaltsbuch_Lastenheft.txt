@@ -1,0 +1,65 @@
+Lastenheft
+Quelle: "Anwendungsentwicklung in Theorie und Praxis" 
+Bildungsverlag EINS westermann, 1.Auflage, 2019
+/Version/Datum/Kommentar
+/1.0/2025-08-06/erstellt
+
+1.Ziel
+/Nr/Bezeichnung
+/LZ001/Ein Haushaltsbuch als Übersicht über Ausgaben. 
+
+2.Rahmenbedingungen
+/Nr/Bezeichnung
+/LR001/Privates Übungsprojekt
+
+3.Kontext und Überblick
+/LK001/Rechner der Benutzer nutzen Win10 und LinuxMint.
+
+4.Funktionale Anforderungen
+Das Haushaltsbuch soll...
+
+/Nr/Bezeichnung
+/LFA001/Artikel hinzufügen löschen, ändern können.
+/LFA002/Einkäufe hinzufügen löschen, ändern können.
+/LFA003/Position eines Einkaufs bei Bedarf als nicht notwendig markieren können (Luxus, Notwendig). Beispiel: eine zusätzliche 10. Hose, obwohl noch genügend vorhanden oder Genussmittel.
+/LFA004/Einkaufssummen und Einkäufe nach Notwendigkeit filtern können.
+/LFA005/Einkäufe sollen Personen zugeordnet werden können? Oder Benutzer anlegen?
+/LFA006/Kategorien hinzufügen, löschen, ändern können.
+/LFA007/Artikel nach Kategorien filtern können.
+/LFA008/Artikel Händlern zuordnen können.
+/LFA009/Artikelpreise bei Angebot oder Privatkauf markieren und anpassen können.
+/LFA010/die Summe der Einkäufe berechnen und anzeigen.
+/LFA011/die Summe der nicht notwendigen Einkäufe berechnen und anzeigen können.
+/LFA012/die Summe der notwendigen Einkäufe berechnen und anzeigen können.
+/LFA013/die Möglichkeit bieten, dem Nutzer ein Budget zur Verfügung zu stellen.
+/LFA014/das Budget des Nutzers nach einem Einkauf aktualisieren.
+
+Spätere Features:
+/Nr/Bezeichnung
+/LFB001/Budgets hinzufügen, löschen, ändern können.
+/LFB002/die Budgets einem oder mehreren Nutzern zur Verfügung stellen.
+/LFB003/Ausgaben den betreffenden Budgets zuordnen und damit verrechnen können.
+
+5.Qualitätsanforderungen
+/Nr/Bezeichnung
+
+Reaktionszeit:
+/LQ001/ keine Anforderungen. Es ist ein Übungsprojekt.
+
+Systemqualität/(sehr gut, gut, normal, nicht relevant):
+/LQ002/Funktionalität/ normal
+/LQ003/Zuverlässigkeit/ normal
+/LQ004/Benutzbarkeit/ nicht relevant
+/LQ005/Effizienz/ nicht relevant
+/LQ006/Änderbarkeit/ normal
+/LQ007/Übertragbarkeit/ nicht relevant
+
+6.Glossar
+Artikel: Gegenstand, der erworben werden kann. Gehört zu einer -> Kategorie.
+Benutzer: Einkäufer, der über ein Budget verfügt um Einkäufe zu tätigen.
+Einkauf: Vorgang
+Händler: Verkäufer mit Ladensitz. 
+Kategorie: Sammelbegriff von Artikeln.
+Laden: Verkaufsort eines -> Händlers. Kann bspw. eine von mehreren Filialen sein.
+Ort: Ort mit Postleitzahl eines -> Ladens.
+Position: -> Artikel, der gekauft wird. Mengenangabe notwendig. Kann luxus oder notwendig sein
