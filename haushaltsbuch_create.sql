@@ -18,11 +18,12 @@ CONSTRAINT FK_kategorie_IDKategorie
 	ON UPDATE CASCADE
 );
 
-CREATE TABLE einkauf_artikel(
-posNr INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE liste(
+IDListe INT NOT NULL PRIMARY KEY,
 anzahl INT NOT NULL,
 preis FLOAT NOT NULL,
 luxus BOOLEAN DEFAULT '0',
+notiz VARCHAR(100),
 IDArtikel INT,
 CONSTRAINT FK_artikel_IDArtikel
 	FOREIGN KEY(IDArtikel) REFERENCES artikel(IDArtikel)
@@ -65,17 +66,18 @@ budget FLOAT
 );
 
 CREATE TABLE einkauf(
-belegNr INT PRIMARY KEY NOT NULL,
+IDEinkauf INT AUTO_INCREMENT PRIMARY KEY,
+belegNr INT NOT NULL,
 datum DATE NOT NULL,
 IDBenutzer INT,
-posNr INT,
+IDListe INT,
 IDHaendler INT,
 CONSTRAINT FK_benutzer_IDBenutzer
 	FOREIGN KEY(IDBenutzer) REFERENCES benutzer(IDBenutzer)
 	ON DELETE SET NULL
 	ON UPDATE CASCADE,
-CONSTRAINT FK_einkauf_artikel_posNr
-	FOREIGN KEY(posNr) REFERENCES einkauf_artikel(posNr)
+CONSTRAINT FK_liste_IDListe
+	FOREIGN KEY(IDListe) REFERENCES liste(IDListe)
 	ON DELETE SET NULL
 	ON UPDATE CASCADE,
 CONSTRAINT FK_haendler_IDHaendler
