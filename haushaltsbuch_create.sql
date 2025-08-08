@@ -57,7 +57,6 @@ IDEinkauf INT AUTO_INCREMENT PRIMARY KEY,
 belegNr INT NOT NULL,
 datum DATE NOT NULL,
 IDBenutzer INT,
-IDListe INT,
 IDHaendler INT,
 CONSTRAINT FK_benutzer_IDBenutzer
 	FOREIGN KEY(IDBenutzer) REFERENCES benutzer(IDBenutzer)
