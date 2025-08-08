@@ -98,7 +98,7 @@ VALUES
 	(120, '2025-08-02', 5, 6)
 ;
 	
-INSERT INTO haushaltsbuch.liste(
+INSERT INTO haushaltsbuch.positionnr(
 	anzahl, preis, luxus, IDArtikel, IDEinkauf
 	)
 VALUES
