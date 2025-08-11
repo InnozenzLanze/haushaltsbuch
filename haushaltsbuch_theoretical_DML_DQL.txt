@@ -1,0 +1,215 @@
+DML/DQL nach UseCaseDiagramm
+
+__1.0
+INSERT INTO haushaltsbuch.ort(
+	PLZ, ortname
+	)
+VALUES
+	(ortPLZ, ortOrtname)
+;
+
+__1.1
+SELECT * FROM haushaltsbuch.ort;
+//sinnvoll filtern
+
+__1.2
+ALTER
+//fortführen
+
+__1.3
+DELETE
+//fortführen
+
+__2.0
+INSERT INTO haushaltsbuch.laden(
+	strasse, hausNr, PLZ
+	)
+VALUES
+	(ladenStrasse, ladenHausNr, ladenPLZ)
+;
+
+__2.1
+SELECT * FROM haushaltsbuch.laden;
+//sinnvoll filtern
+
+__2.2
+ALTER
+//fortführen
+
+__2.3
+DELETE
+//fortführen
+
+__3.0
+INSERT INTO haushaltsbuch.haendler(
+	haendlername, IDLaden
+	)
+VALUES
+	(haendlerHaendlername, haendlerIDLaden)
+;
+
+__3.1
+SELECT * FROM haushaltsbuch.haendler;
+//sinnvoll filtern
+
+__3.2
+ALTER
+//fortführen
+
+__3.3
+DELETE
+//fortführen
+
+__4.0
+INSERT INTO haushaltsbuch.kategorie(
+	bezeichnung
+	)
+VALUES
+	(kategorieBezeichnung)
+;
+
+__4.1
+SELECT * FROM haushaltsbuch.kategorie;
+//sinnvoll filtern
+
+__4.2
+ALTER
+//fortführen
+
+__4.3
+DELETE
+//fortführen
+
+__5.0
+INSERT INTO haushaltsbuch.artikel(
+	bezeichnung, notiz, IDKategorie
+	)
+VALUES
+	(artikelBezeichnung, artikelNotiz, artikelIDKategorie)
+; 
+
+__5.1
+SELECT * FROM haushaltsbuch.artikel;
+//sinnvoll filtern
+
+__5.2
+ALTER
+//fortführen
+
+__5.3
+DELETE
+//fortführen
+
+__6.0 
+INSERT INTO haushaltsbbuch.benutzer(
+	nachname, 
+	vorname, 
+	geburtsdatum, 
+	budget
+	)
+VALUES(
+	benutzerNachname, 
+	benutzerVorname, 
+	benutzerGeburtsdatum, 
+	benutzerBudget
+	)
+;
+
+__6.1
+SELECT * FROM haushaltsbuch.benutzer;
+//sinnvoll filtern
+
+__6.2
+ALTER
+//fortführen
+
+__6.3
+DELETE
+//fortführen
+
+__7.0
+INSERT INTO haushaltsbuch.einkauf(
+	belegNr, 
+	datum, 
+	IDBenutzer, 
+	IDHaendler
+	)
+VALUES(
+	einkaufBelegNr, 
+	einkaufDatum, 
+	einkaufIDBenutzer, 
+	einkaufIDHaendler
+	)
+;
+
+__7.1
+SELECT * FROM haushaltsbuch.einkauf;
+//sinnvoll filtern
+
+__7.2
+ALTER
+//fortführen
+
+__7.3
+DELETE
+//fortführen
+
+__8.0
+INSERT INTO haushaltsbuch.positionnr(
+	anzahl, 
+	preis, 
+	luxus, 
+	notiz, 
+	IDArtikel, 
+	IDEinkauf
+	)
+VALUES(
+	positionnrAnzahl, 
+	positionnrPreis, 
+	positionnrLuxus, 
+	positionnrNotiz, 
+	positionnrIDArtikel, 
+	positionnrIDEinkauf
+	)
+;
+
+__8.1
+SELECT * FROM haushaltsbuch.positionnr;
+//sinnvoll filtern
+
+__8.2
+ALTER
+//fortführen
+
+__8.3
+DELETE
+//fortführen
+
+__9.0.0
+SELECT * FROM haushaltsbuch.positionnr
+WHERE positionnr.luxus = 1
+;
+//mit Variablenübergabe "positionnrLuxus" arbeiten?
+
+__9.0.1
+SELECT * FROM haushaltsbuch.positionnr
+WHERE positionnr.luxus = 0
+;
+//mit Variablenübergabe "positionnrLuxus" arbeiten?
+
+__9.1.0+9.2.0
+//summe berechnen und anzeigen von positionnr.luxus=1
+
+__9.1.1+9.2.1
+//summe berechnen und anzeigen von positionnr.luxus=0
+
+__10.0+10.1
+//summe berechnen und anzeigen von einkauf
+
+__11.0
+//nach kategorie filtern (für spätere zuordnung budget und anzeige)
+
+__12.0
+ALTER
+//benutzer.budget aktualisieren
+
