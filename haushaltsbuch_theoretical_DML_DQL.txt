@@ -12,8 +12,8 @@ VALUES
 ;
 
 __1.1
-SELECT * FROM haushaltsbuch.ort;
-//sinnvoll filtern
+SELECT * FROM haushaltsbuch.ort
+;
 
 __1.2
 UPDATE TABLE haushaltsbuch.ort(
@@ -33,8 +33,14 @@ VALUES
 ;
 
 __2.1
-SELECT * FROM haushaltsbuch.laden;
-//sinnvoll filtern
+SELECT 
+	haushaltsbuch.laden.strasse, 
+	haushaltsbuch.laden.hausNr, 
+	haushaltsbuch.ort.PLZ, 
+	haushaltsbuch.ort.ortname 
+FROM haushaltsbuch.laden
+JOIN haushaltsbuch.ort ON haushaltsbuch.ort.PLZ=haushaltsbuch.laden.PLZ
+;
 
 __2.2
 UPDATE
@@ -53,8 +59,16 @@ VALUES
 ;
 
 __3.1
-SELECT * FROM haushaltsbuch.haendler;
-//sinnvoll filtern
+SELECT 
+	haushaltsbuch.haendler.haendlername,
+	haushaltsbuch.laden.strasse,
+	haushaltsbuch.laden.hausNr,
+	haushaltsbuch.ort.PLZ,
+	haushaltsbuch.ort.ortname
+FROM haushaltsbuch.haendler
+JOIN haushaltsbuch.laden ON haushaltsbuch.laden.IDLaden=haushaltsbuch.haendler.IDLaden
+JOIN haushaltsbuch.ort ON haushaltsbuch.ort.PLZ=haushaltsbuch.laden.PLZ
+;
 
 __3.2
 UPDATE
