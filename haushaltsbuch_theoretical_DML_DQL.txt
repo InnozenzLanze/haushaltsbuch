@@ -3,6 +3,11 @@ DML/DQL nach UseCaseDiagramm
 ALTER TABLE = Ändert die Struktur einer Tabelle
 UPDATE tabellenname SET = Ändert den Inhalt einer Tabelle
 
+Auswirkung von Datentypen in Berechnung
+FLOAT (single precision)= anzahl*preis Berechnungen ungenau. Grund ist die Speicherung als binär
+DOUBLE (double precision)= anzahl*preis funktionieren, SUM(anzahl*preis) auch bei geringeren Werten minimal ungenau (0,0000 0000 0000 000X)
+DECIMAL (exact; Fließkommazahl bestehend aus Ganzahl mit Kommaposition)= anzahl*preis funktionieren genau
+
 __1.0
 INSERT INTO haushaltsbuch.ort(
 	PLZ, ortname
@@ -269,19 +274,62 @@ WHERE positionnr.luxus = 0
 
 __9.1.0+9.2.0 Summe berechnen und anzeigen von positionnr.luxus=1
 SELECT
-anzahl*preis AS preis_gesamt
+	haushaltsbuch.positionnr.IDPositionNr,
+	haushaltsbuch.positionnr.anzahl,
+	haushaltsbuch.artikel.bezeichnung,
+	haushaltsbuch.kategorie.bezeichnung,
+	haushaltsbuch.positionnr.preis,
+	anzahl*preis AS preis_gesamt,
+	haushaltsbuch.einkauf.belegNr,
+	haushaltsbuch.positionnr.notiz
 FROM haushaltsbuch.positionnr
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel=haushaltsbuch.positionnr.IDArtikel
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf=haushaltsbuch.positionnr.IDEinkauf
+WHERE luxus=1
 ;
-//unvollständig
 
 __9.1.1+9.2.1 Summe berechnen und anzeigen von positionnr.luxus=0
-
+SELECT
+	haushaltsbuch.positionnr.IDPositionNr,
+	haushaltsbuch.positionnr.anzahl,
+	haushaltsbuch.artikel.bezeichnung,
+	haushaltsbuch.kategorie.bezeichnung,
+	haushaltsbuch.positionnr.preis,
+	anzahl*preis AS preis_gesamt,
+	haushaltsbuch.einkauf.belegNr,
+	haushaltsbuch.positionnr.notiz
+FROM haushaltsbuch.positionnr
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel=haushaltsbuch.positionnr.IDArtikel
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf=haushaltsbuch.positionnr.IDEinkauf
+WHERE luxus=0
+;
 
 __10.0+10.1 Summe berechnen und anzeigen von einkauf
-
-
-__11.0 nach kategorie filtern (für spätere zuordnung budget und anzeige)
 SELECT
+	haushaltsbuch.einkauf.belegNr,
+	haushaltsbuch.einkauf.datum,
+	haushaltsbuch.benutzer.nachname,
+	haushaltsbuch.benutzer.vorname,
+	haushaltsbuch.haendler.haendlername,
+	SUM(anzahl*preis) AS summe_einkauf
+FROM haushaltsbuch.einkauf
+JOIN haushaltsbuch.benutzer ON haushaltsbuch.benutzer.IDBenutzer=haushaltsbuch.einkauf.IDBenutzer
+JOIN haushaltsbuch.haendler ON haushaltsbuch.haendler.IDHaendler=haushaltsbuch.einkauf.IDHaendler
+JOIN haushaltsbuch.positionnr ON haushaltsbuch.positionnr.IDEinkauf=haushaltsbuch.einkauf.IDEinkauf
+GROUP BY einkauf.belegNr
+;
+
+__11.0 nach kategorie gruppieren (für spätere zuordnung budget und anzeige)
+SELECT
+	haushaltsbuch.kategorie.bezeichnung,
+	SUM(anzahl*preis) AS summe_einkauf_kategorie
+FROM haushaltsbuch.kategorie
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDKategorie=haushaltsbuch.kategorie.IDKategorie
+JOIN haushaltsbuch.positionnr ON haushaltsbuch.positionnr.IDArtikel=haushaltsbuch.artikel.IDArtikel
+GROUP BY kategorie.bezeichnung
+;
 
 __12.0 benutzer.budget aktualisieren
 UPDATE
