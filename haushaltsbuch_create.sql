@@ -49,7 +49,7 @@ IDBenutzer INT AUTO_INCREMENT PRIMARY KEY,
 geburtsdatum DATE,
 nachname VARCHAR(30) NOT NULL,
 vorname VARCHAR(30) NOT NULL,
-budget DOUBLE DEFAULT '0.00'
+budget DECIMAL DEFAULT '0.00'
 );
 
 CREATE TABLE einkauf(
@@ -71,7 +71,7 @@ CONSTRAINT FK_haendler_IDHaendler
 CREATE TABLE positionnr(
 IDPositionNr INT AUTO_INCREMENT PRIMARY KEY,
 anzahl INT NOT NULL,
-preis DOUBLE NOT NULL,
+preis DECIMAL NOT NULL,
 luxus BOOLEAN DEFAULT '0',
 notiz VARCHAR(100),
 IDArtikel INT,
