@@ -12,18 +12,24 @@ __1.0
 INSERT INTO haushaltsbuch.ort(
 	PLZ, ortname
 	)
-VALUES
-	(ortPLZ, ortOrtname)
+VALUES	(insert_PLZ, insert_ortname)
 ;
 
 __1.1
 SELECT * FROM haushaltsbuch.ort
 ;
 
-__1.2
-UPDATE TABLE haushaltsbuch.ort(
-
-//fortführen
+__1.2.1
+UPDATE haushaltsbuch.ort
+SET	PLZ = update_PLZ
+WHERE 	PLZ = Condition_PLZ
+;
+__1.2.2
+UPDATE haushaltsbuch.ort
+SET	ort = update_ort
+WHERE 	PLZ = Condition_PLZ
+;
+//Sinnhaftigkeit?
 
 __1.3
 DELETE
@@ -33,18 +39,16 @@ __2.0
 INSERT INTO haushaltsbuch.laden(
 	strasse, hausNr, PLZ
 	)
-VALUES
-	(ladenStrasse, ladenHausNr, ladenPLZ)
+VALUES	(insert_strasse, insert_hausNr, insert_PLZ)
 ;
 
 __2.1
-SELECT 
-	haushaltsbuch.laden.strasse, 
+SELECT 	haushaltsbuch.laden.strasse, 
 	haushaltsbuch.laden.hausNr, 
 	haushaltsbuch.ort.PLZ, 
 	haushaltsbuch.ort.ortname 
 FROM haushaltsbuch.laden
-JOIN haushaltsbuch.ort ON haushaltsbuch.ort.PLZ=haushaltsbuch.laden.PLZ
+JOIN haushaltsbuch.ort ON haushaltsbuch.ort.PLZ = haushaltsbuch.laden.PLZ
 ;
 
 __2.2
@@ -59,20 +63,18 @@ __3.0
 INSERT INTO haushaltsbuch.haendler(
 	haendlername, IDLaden
 	)
-VALUES
-	(haendlerHaendlername, haendlerIDLaden)
+VALUES	(insert_haendlername, insert_IDLaden)
 ;
 
 __3.1
-SELECT 
-	haushaltsbuch.haendler.haendlername,
+SELECT 	haushaltsbuch.haendler.haendlername,
 	haushaltsbuch.laden.strasse,
 	haushaltsbuch.laden.hausNr,
 	haushaltsbuch.ort.PLZ,
 	haushaltsbuch.ort.ortname
 FROM haushaltsbuch.haendler
-JOIN haushaltsbuch.laden ON haushaltsbuch.laden.IDLaden=haushaltsbuch.haendler.IDLaden
-JOIN haushaltsbuch.ort ON haushaltsbuch.ort.PLZ=haushaltsbuch.laden.PLZ
+JOIN haushaltsbuch.laden ON haushaltsbuch.laden.IDLaden = haushaltsbuch.haendler.IDLaden
+JOIN haushaltsbuch.ort ON haushaltsbuch.ort.PLZ = haushaltsbuch.laden.PLZ
 ;
 
 __3.2
@@ -87,8 +89,7 @@ __4.0
 INSERT INTO haushaltsbuch.kategorie(
 	bezeichnung
 	)
-VALUES
-	(kategorieBezeichnung)
+VALUES	(insert_bezeichnung)
 ;
 
 __4.1
@@ -107,18 +108,16 @@ __5.0
 INSERT INTO haushaltsbuch.artikel(
 	bezeichnung, notiz, IDKategorie
 	)
-VALUES
-	(artikelBezeichnung, artikelNotiz, artikelIDKategorie)
+VALUES	(insert_bezeichnung, insert_notiz, insert_IDKategorie)
 ; 
 
 __5.1
-SELECT 
-	haushaltsbuch.artikel.IDArtikel,
+SELECT 	haushaltsbuch.artikel.IDArtikel,
 	haushaltsbuch.artikel.bezeichnung,
 	haushaltsbuch.artikel.notiz,
 	haushaltsbuch.kategorie.bezeichnung
 FROM haushaltsbuch.artikel
-JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie = haushaltsbuch.artikel.IDKategorie
 ;
 
 __5.2
@@ -136,17 +135,16 @@ INSERT INTO haushaltsbbuch.benutzer(
 	geburtsdatum, 
 	budget
 	)
-VALUES(
-	benutzerNachname, 
-	benutzerVorname, 
-	benutzerGeburtsdatum, 
-	benutzerBudget
+VALUES(	
+	insert_nachname, 
+	insert_vorname, 
+	insert_geburtsdatum, 
+	insert_budget
 	)
 ;
 
 __6.1
-SELECT 
-	haushaltsbuch.benutzer.nachname,
+SELECT 	haushaltsbuch.benutzer.nachname,
 	haushaltsbuch.benutzer.vorname,
 	haushaltsbuch.benutzer.geburtsdatum,
 	haushaltsbuch.benutzer.budget 
@@ -169,23 +167,22 @@ INSERT INTO haushaltsbuch.einkauf(
 	IDHaendler
 	)
 VALUES(
-	einkaufBelegNr, 
-	einkaufDatum, 
-	einkaufIDBenutzer, 
-	einkaufIDHaendler
+	insert_belegNr, 
+	insert_datum, 
+	insert_IDBenutzer, 
+	insert_IDHaendler
 	)
 ;
 
 __7.1
-SELECT 
-	haushaltsbuch.einkauf.belegNr,
+SELECT 	haushaltsbuch.einkauf.belegNr,
 	haushaltsbuch.einkauf.datum,
 	haushaltsbuch.benutzer.nachname,
 	haushaltsbuch.benutzer.vorname,
 	haushaltsbuch.haendler.haendlername
 FROM haushaltsbuch.einkauf
-JOIN haushaltsbuch.benutzer ON haushaltsbuch.benutzer.IDBenutzer=haushaltsbuch.einkauf.IDBenutzer
-JOIN haushaltsbuch.haendler ON haushaltsbuch.haendler.IDHaendler=haushaltsbuch.einkauf.IDHaendler
+JOIN haushaltsbuch.benutzer ON haushaltsbuch.benutzer.IDBenutzer = haushaltsbuch.einkauf.IDBenutzer
+JOIN haushaltsbuch.haendler ON haushaltsbuch.haendler.IDHaendler = haushaltsbuch.einkauf.IDHaendler
 ;
 //Summen
 
@@ -207,18 +204,17 @@ INSERT INTO haushaltsbuch.positionnr(
 	IDEinkauf
 	)
 VALUES(
-	positionnrAnzahl, 
-	positionnrPreis, 
-	positionnrLuxus, 
-	positionnrNotiz, 
-	positionnrIDArtikel, 
-	positionnrIDEinkauf
+	insert_anzahl, 
+	insert_preis, 
+	insert_luxus, 
+	insert_notiz, 
+	insert_IDArtikel, 
+	insert_IDEinkauf
 	)
 ;
 
 __8.1
-SELECT 
-	haushaltsbuch.positionnr.IDPositionNr,
+SELECT 	haushaltsbuch.positionnr.IDPositionNr,
 	haushaltsbuch.positionnr.anzahl,
 	haushaltsbuch.artikel.bezeichnung,
 	haushaltsbuch.kategorie.bezeichnung,
@@ -227,9 +223,9 @@ SELECT
 	haushaltsbuch.einkauf.belegNr,
 	haushaltsbuch.positionnr.notiz
 FROM haushaltsbuch.positionnr
-JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel=haushaltsbuch.positionnr.IDArtikel
-JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
-JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf=haushaltsbuch.positionnr.IDEinkauf
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel = haushaltsbuch.positionnr.IDArtikel
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie = haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf = haushaltsbuch.positionnr.IDEinkauf
 ;
 
 __8.2
@@ -241,8 +237,7 @@ DELETE
 //fortführen
 
 __9.0.0 Luxusartikel
-SELECT 
-	haushaltsbuch.positionnr.IDPositionNr,
+SELECT 	haushaltsbuch.positionnr.IDPositionNr,
 	haushaltsbuch.positionnr.anzahl,
 	haushaltsbuch.artikel.bezeichnung,
 	haushaltsbuch.kategorie.bezeichnung,
@@ -250,15 +245,14 @@ SELECT
 	haushaltsbuch.einkauf.belegNr,
 	haushaltsbuch.positionnr.notiz
 FROM haushaltsbuch.positionnr
-JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel=haushaltsbuch.positionnr.IDArtikel
-JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
-JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf=haushaltsbuch.positionnr.IDEinkauf
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel = haushaltsbuch.positionnr.IDArtikel
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie = haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf = haushaltsbuch.positionnr.IDEinkauf
 WHERE positionnr.luxus = 1
 ;
 
 __9.0.1 keine Luxusartikel
-SELECT 
-	haushaltsbuch.positionnr.IDPositionNr,
+SELECT 	haushaltsbuch.positionnr.IDPositionNr,
 	haushaltsbuch.positionnr.anzahl,
 	haushaltsbuch.artikel.bezeichnung,
 	haushaltsbuch.kategorie.bezeichnung,
@@ -266,15 +260,14 @@ SELECT
 	haushaltsbuch.einkauf.belegNr,
 	haushaltsbuch.positionnr.notiz
 FROM haushaltsbuch.positionnr
-JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel=haushaltsbuch.positionnr.IDArtikel
-JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
-JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf=haushaltsbuch.positionnr.IDEinkauf
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel = haushaltsbuch.positionnr.IDArtikel
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie = haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf = haushaltsbuch.positionnr.IDEinkauf
 WHERE positionnr.luxus = 0
 ;
 
 __9.1.0+9.2.0 Summe berechnen und anzeigen von positionnr.luxus=1
-SELECT
-	haushaltsbuch.positionnr.IDPositionNr,
+SELECT	haushaltsbuch.positionnr.IDPositionNr,
 	haushaltsbuch.positionnr.anzahl,
 	haushaltsbuch.artikel.bezeichnung,
 	haushaltsbuch.kategorie.bezeichnung,
@@ -283,15 +276,14 @@ SELECT
 	haushaltsbuch.einkauf.belegNr,
 	haushaltsbuch.positionnr.notiz
 FROM haushaltsbuch.positionnr
-JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel=haushaltsbuch.positionnr.IDArtikel
-JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
-JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf=haushaltsbuch.positionnr.IDEinkauf
-WHERE luxus=1
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel = haushaltsbuch.positionnr.IDArtikel
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie = haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf = haushaltsbuch.positionnr.IDEinkauf
+WHERE luxus = 1
 ;
 
 __9.1.1+9.2.1 Summe berechnen und anzeigen von positionnr.luxus=0
-SELECT
-	haushaltsbuch.positionnr.IDPositionNr,
+SELECT	haushaltsbuch.positionnr.IDPositionNr,
 	haushaltsbuch.positionnr.anzahl,
 	haushaltsbuch.artikel.bezeichnung,
 	haushaltsbuch.kategorie.bezeichnung,
@@ -300,34 +292,32 @@ SELECT
 	haushaltsbuch.einkauf.belegNr,
 	haushaltsbuch.positionnr.notiz
 FROM haushaltsbuch.positionnr
-JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel=haushaltsbuch.positionnr.IDArtikel
-JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie=haushaltsbuch.artikel.IDKategorie
-JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf=haushaltsbuch.positionnr.IDEinkauf
-WHERE luxus=0
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDArtikel = haushaltsbuch.positionnr.IDArtikel
+JOIN haushaltsbuch.kategorie ON haushaltsbuch.kategorie.IDKategorie = haushaltsbuch.artikel.IDKategorie
+JOIN haushaltsbuch.einkauf ON haushaltsbuch.einkauf.IDEinkauf = haushaltsbuch.positionnr.IDEinkauf
+WHERE luxus = 0
 ;
 
 __10.0+10.1 Summe berechnen und anzeigen von einkauf
-SELECT
-	haushaltsbuch.einkauf.belegNr,
+SELECT	haushaltsbuch.einkauf.belegNr,
 	haushaltsbuch.einkauf.datum,
 	haushaltsbuch.benutzer.nachname,
 	haushaltsbuch.benutzer.vorname,
 	haushaltsbuch.haendler.haendlername,
 	SUM(anzahl*preis) AS summe_einkauf
 FROM haushaltsbuch.einkauf
-JOIN haushaltsbuch.benutzer ON haushaltsbuch.benutzer.IDBenutzer=haushaltsbuch.einkauf.IDBenutzer
-JOIN haushaltsbuch.haendler ON haushaltsbuch.haendler.IDHaendler=haushaltsbuch.einkauf.IDHaendler
-JOIN haushaltsbuch.positionnr ON haushaltsbuch.positionnr.IDEinkauf=haushaltsbuch.einkauf.IDEinkauf
+JOIN haushaltsbuch.benutzer ON haushaltsbuch.benutzer.IDBenutzer = haushaltsbuch.einkauf.IDBenutzer
+JOIN haushaltsbuch.haendler ON haushaltsbuch.haendler.IDHaendler = haushaltsbuch.einkauf.IDHaendler
+JOIN haushaltsbuch.positionnr ON haushaltsbuch.positionnr.IDEinkauf = haushaltsbuch.einkauf.IDEinkauf
 GROUP BY einkauf.belegNr
 ;
 
 __11.0 nach kategorie gruppieren (für spätere zuordnung budget und anzeige)
-SELECT
-	haushaltsbuch.kategorie.bezeichnung,
+SELECT	haushaltsbuch.kategorie.bezeichnung,
 	SUM(anzahl*preis) AS summe_einkauf_kategorie
 FROM haushaltsbuch.kategorie
-JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDKategorie=haushaltsbuch.kategorie.IDKategorie
-JOIN haushaltsbuch.positionnr ON haushaltsbuch.positionnr.IDArtikel=haushaltsbuch.artikel.IDArtikel
+JOIN haushaltsbuch.artikel ON haushaltsbuch.artikel.IDKategorie = haushaltsbuch.kategorie.IDKategorie
+JOIN haushaltsbuch.positionnr ON haushaltsbuch.positionnr.IDArtikel = haushaltsbuch.artikel.IDArtikel
 GROUP BY kategorie.bezeichnung
 ;
 
