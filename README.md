@@ -1,3 +1,10 @@
+status: derzeit inaktiv.
+
+Kenntnisse für sinnvolle Umsetzung werden derzeit aufgebaut. 
+
+2025-11-10
+
+_______________________
 Privates Projekt neben der Ausbildung zum Fachinformatiker für Anwendungsentwicklung. 
 Das Projekt ist eine eigenverantwortliche Einzelarbeit ohne Terminfrist oder Kontrolle durch Dritte.
 
